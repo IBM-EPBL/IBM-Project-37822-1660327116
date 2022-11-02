@@ -1,97 +1,58 @@
-from turtle import st
-from flask import Flask, render_template, request, redirect, url_for, session, render_template_string
-from markupsafe import escape
-import sqlite3 as sql
+from flask import  Flask,render_template, request, redirect, url_for, session
 import ibm_db
 
 app = Flask(__name__)
 
-@app.route('/')
+try:
+    conn = ibm_db.connect("DATABASE=BLUDB;HOSTNAME=2f3279a5-73d1-4859-88f0-a6c3e6b4b907.c3n41cmd0nqnrk39u98g.databases.appdomain.cloud;PORT=30756;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=rjf76022;PWD=16fw5YDUBoUYyOTx",'','')
+    print("Connected to database: ", conn)
+except:
+    print ("Unable to connect to the database")
+
+@app.route('/',methods = ['POST', 'GET'])
 def home():
-  return render_template('home.html')
+    if request.method=="POST":
+        username=request.form['username']
+        rollnumber=request.form['rollnumber']
+        email=request.form['email']
+        password=request.form['password']
+        print(username,rollnumber,email,password)
+        sql="SELECT * FROM user where username='"+username+"'"
+        print(sql)
+        stmt=ibm_db.exec_immediate(conn,sql)
+        account=ibm_db.fetch_assoc(stmt)
+        print(account)
+        if account:
+            print("This user already exists")
+            return render_template('register.html')
+        else:
+            print("User does not exist")
+            insert_query="INSERT INTO user values('"+username+"','"+rollnumber+"','"+email+"','"+password+"')"
+            ibm_db.exec_immediate(conn,insert_query)
+            print("You are successfully registered")
+            return render_template('login.html')
 
-@app.route('/signin')
-def signin():
-  return render_template('signin.html')
+    return render_template('register.html')
 
-@app.route('/signup')
-def signup():
-  return render_template('signup.html')
+@app.route('/login',methods = ['POST', 'GET'])
+def login():
+    if request.method=="POST":
+        email=request.form['email']
+        password=request.form['password']
+        print(email,password)
+        sql="SELECT password FROM user where email='"+email+"'"
+        print(sql)
+        stmt=ibm_db.exec_immediate(conn,sql)
+        pwd=ibm_db.fetch_assoc(stmt)
+        key=pwd.get('PASSWORD')
+        if password==key.rstrip():
+            print("User exists")
+            return render_template('welcome.html')
+        else:
+            print("User does not exist")
+            return render_template('welcome.html')
 
-@app.route('/logout')
-def logout():
-  return render_template('logout.html')
+    return render_template('login.html')
 
-@app.route('/aboutus')
-def aboutus():
-  return render_template('aboutus.html')
-
-def get_db():
-    conn = sql.connect('signup_database.db')
-    conn.row_factory = sql.Row
-    return conn
-
-@app.route('/signup',methods = ['POST', 'GET'])
-def signup_page():
-  if request.method == 'POST':
-    try:
-      name = request.form['name']
-      username = request.form['username']
-      address = request.form['address']
-      password = request.form['password']
-         
-      with sql.connect("signup_database.db") as con:
-        cur = con.cursor()
-        cur.execute("INSERT INTO users (name,username,address,password) VALUES (?,?,?,?)",(name,username,address,password) )
-        con.commit()
-        msg = "Record successfully added!"
-    except:
-      con.rollback()
-      msg = "error in insert operation"
-
-    finally:
-      return render_template("home.html",msg = "created")
-      con.close()
-
-@app.route('/signin', methods=('GET', 'POST'))
-def signin_page():
-    error = None
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        db = get_db()
-        user = db.execute(
-            'SELECT password FROM users WHERE username = ?', (username, )
-        ).fetchone()
-        
-        if user is None:
-            error = 'Incorrect Username/Password.'
-        elif password != user['password']:
-            print(user)
-            error = 'Incorrect Password.'
-
-        if error is None:
-            return render_template("logout.html")
-        db.close()
-
-    return render_template('signin.html', title='Sign In', error=error)
-
-@app.route('/logout', methods=('GET', 'POST'))
-def logout_page(nme, adrss):
-    error = None
-    if request.method == 'POST':
-        username = request.form['username']
-        db = get_db()
-        nme = db.execute(
-          'SELECT name FROM users WHERE username = ?', (username, )
-          ).fetchone()
-        adrss = db.execute(
-           'SELECT address FROM users WHERE username = ?', (username, )
-          ).fetchone()
-        return render_template(
-          'logout.html',
-          msg1=nme,
-          msg2=adrss)
-
-if __name__=='__main__':
-    app.run(host='0.0.0.0', port=8081, debug=True)
+if __name__ == "main":
+    app.run(debug=True)
