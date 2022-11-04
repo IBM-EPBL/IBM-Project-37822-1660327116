@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://ibm-object-assignment3.s3.jp-tok.cloud-object-storage.appdomain.cloud/style.css"
-    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Assignment 3</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
-    <title>Assignment 3</title>
+    <link
+      rel="stylesheet"
+      href="https://jesinbucket.s3.jp-tok.cloud-object-storage.appdomain.cloud/style.css"
+    />
     <script>
       window.watsonAssistantChatOptions = {
-        integrationID: "22535791-4ffa-4f99-81a8-fa49b8ad19c8", // The ID of this integration.
-        region: "jp-tok", // The region your integration is hosted in.
-        serviceInstanceID: "1cd0eba8-12ee-45fd-8900-ce4fa038f599", // The ID of your service instance.
+        integrationID: "2469d091-f233-483c-9661-0c1c245d0a01", // The ID of this integration.
+        region: "au-syd", // The region your integration is hosted in.
+        serviceInstanceID: "58205604-3422-40d8-b3e2-7dbfc58f8b45", // The ID of your service instance.
         onLoad: function (instance) {
           instance.render();
         },
@@ -33,121 +33,102 @@
       });
     </script>
   </head>
-
   <body>
-    <!-- Header -->
-    <section id="header">
-      <div class="header container">
-        <div class="nav-bar">
-          <div class="brand">
-            <h1><span>IBM Services</span></h1>
-          </div>
-          <div class="nav-list">
-            <div class="hamburger">
-              <div class="bar"></div>
-            </div>
-            <ul>
-              <li><a href="#services" data-after="Service">Services</a></li>
-              <li><a href="#about" data-after="About">About</a></li>
-            </ul>
-          </div>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">HOSPITAL</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+          </ul>
+          <span class="d-flex"> CHENNAI </span>
         </div>
       </div>
-    </section>
-    <!-- End Header -->
-
-    <!-- Service Section -->
-    <section id="services">
-      <div class="services container">
-        <div class="service-top">
-          <h1 class="section-title">Services</h1>
-        </div>
-        <div class="service-bottom">
-          <div class="card m-2 p-2" style="width: 25rem">
-            <img
-              src="https://ibm-object-assignment3.s3.jp-tok.cloud-object-storage.appdomain.cloud/IBM.png"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <p class="card-text">Many Services Provided by IBM</p>
-            </div>
-          </div>
-          <div class="card m-1 p-2" style="width: 30rem">
-            <img
-              src="https://ibm-object-assignment3.s3.jp-tok.cloud-object-storage.appdomain.cloud/db.png"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <p class="card-text">DB2 is one of the DB Services</p>
-            </div>
-          </div>
-          <div class="card m-1 p-2" style="width: 30rem">
-            <img
-              src="https://ibm-object-assignment3.s3.jp-tok.cloud-object-storage.appdomain.cloud/cloud.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <p class="card-text">Register for Cloud feature Code</p>
-            </div>
-          </div>
-          <div class="card m-1 p-2" style="width: 30rem">
-            <img
-              src="https://ibm-object-assignment3.s3.jp-tok.cloud-object-storage.appdomain.cloud/s3-bucket.png"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <p class="card-text">Wanna store objects?</p>
-            </div>
-          </div>
-          <div class="card m-2 p-2" style="width: 30rem">
-            <img
-              src="https://ibm-object-assignment3.s3.jp-tok.cloud-object-storage.appdomain.cloud/chatbot.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <p class="card-text">Strike a conversation with our Chatbot</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Service Section -->
-
-    <!-- About Section -->
-    <section id="about">
-      <div class="about container">
-        <div class="about-img">
+    </nav>
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="height: 50vh"
+    >
+      <div class="card">
+        <div class="card-body">
           <img
-            src="https://ibm-object-assignment3.s3.jp-tok.cloud-object-storage.appdomain.cloud/about.jpg"
-            alt="img"
-            style="border: 5px solid #fb8500"
+            src="https://jesinbucket.s3.jp-tok.cloud-object-storage.appdomain.cloud/ambulance.jpg"
+            alt="ambulance"
+            srcset=""
+            height="200"
+            width="200"
           />
-        </div>
-        <div class="col-right">
-          <h1 class="section-title">Watson <span>Assistant</span></h1>
-          <p>
-            IBM Watson Assistant is built on deep learning, machine learning,
-            and natural language processing (NLP) models to understand
-            questions, find or search for the best answers, and complete the
-            user’s intended action through conversational AI. Watson also uses
-            intent classification and entity recognition to better understand
-            customers in context and transfer them to a human agent when needed.
-          </p>
-          <a
-            href="https://www.ibm.com/products/watson-assistant/artificial-intelligence"
-            class="effec"
-            style="text-decoration: none"
-            >Wanna Try?</a
-          >
+          <h4 class="card-title text-style">Ambulance Services</h4>
         </div>
       </div>
-    </section>
-    <!-- End About Section -->
+      <div class="card">
+        <div class="card-body">
+          <img
+            src="https://jesinbucket.s3.jp-tok.cloud-object-storage.appdomain.cloud/reception.jpg"
+            alt="reception"
+            srcset=""
+            height="200"
+            width="200"
+          />
+          <h4 class="card-title text-style">Reception Services</h4>
+        </div>
+      </div>
+    </div>
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="height: 50vh"
+    >
+      <div class="card p-2">
+        <div class="card-body">
+          <img
+            src="https://jesinbucket.s3.jp-tok.cloud-object-storage.appdomain.cloud/consultancy.jpg"
+            alt="consultancy"
+            srcset=""
+            height="200"
+            width="200"
+          />
+          <h4 class="card-title text-style">Doctor Consultancy</h4>
+        </div>
+      </div>
+      <div class="card p-2">
+        <div class="card-body">
+          <img
+            src="https://jesinbucket.s3.jp-tok.cloud-object-storage.appdomain.cloud/food.jpg"
+            alt="food"
+            srcset=""
+            height="200"
+            width="200"
+          />
+          <h4 class="card-title text-style">Food Services</h4>
+        </div>
+      </div>
+      <div class="card p-2">
+        <div class="card-body">
+          <img
+            src="https://jesinbucket.s3.jp-tok.cloud-object-storage.appdomain.cloud/pharmacy.jpg"
+            alt="pharmacy"
+            srcset=""
+            height="200"
+            width="200"
+          />
+          <h4 class="card-title text-style">Pharmacy Services</h4>
+        </div>
+      </div>
+    </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
