@@ -1,2 +1,4 @@
 flask
 ibm_db
+python-dotenv
+pandas
