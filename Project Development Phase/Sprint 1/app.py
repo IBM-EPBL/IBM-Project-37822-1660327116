@@ -69,7 +69,7 @@ def home():
 
             if account:
                 print("User already exists")
-                return render_template('register.html')
+                return render_template('register.html', msg="User already exists, Please login")
             else:
                 print("User does not exist")
                 try:
@@ -79,6 +79,7 @@ def home():
                     with open('mail.html', 'r') as f:
                         mail_content= f.read()
                         send_mail(email, mail_content)
+                    return render_template('login.html')
                     
                 except Exception as e:
                     print(e)
@@ -91,31 +92,10 @@ def home():
 
     return render_template('register.html',title="Register")
 
-# @app.route('/login',methods = ['POST', 'GET'])
-# def login():
-#     print("Login")
-#     if request.method == 'POST':
-#         email = request.form['email']
-#         password = request.form['password']
-      
-#         print(email,password)
-
-#         sql = "SELECT password FROM user WHERE email = '"+email+"' "
-#         print(sql)
-#         stmt = ibm_db.exec_immediate(conn, sql)
-#         print(stmt)
-#         pwd = ibm_db.fetch_assoc(stmt)
-#         print(pwd)
-#         key = pwd.get('PASSWORD')
-
-#         if password==key.rstrip():
-#             print("User exists")
-#             return render_template('welcome.html')
-#         else:
-#             print("User does not exist")
-#             return render_template('register.html')
-
-#     return render_template('login.html')
+@app.route('/login',methods = ['POST', 'GET'])
+def login():
+    
+    return render_template('login.html', msg="User exists, Sprint 1 Completed")
 
 if __name__ == "main":
     app. run(debug=True, use_reloader=True)
