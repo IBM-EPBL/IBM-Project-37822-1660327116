@@ -128,30 +128,27 @@ def login():
 @app.route('/dashboard',methods = ['POST', 'GET'])
 def dashboard():
 
-    # url = "https://newscatcher.p.rapidapi.com/v1/search_free"
+    try:
+        #PRODUCTION
+        # url = "https://newscatcher.p.rapidapi.com/v1/search_free"
+        # querystring = {"q":"Russia","lang":"en","media":"True"}
+        # headers = {
+        #     "X-RapidAPI-Key": "78394ce5f7msh148449ce3836679p1239b2jsnb6fb656b52e5",
+        #     "X-RapidAPI-Host": "newscatcher.p.rapidapi.com"
+        # }
+        # response = requests.request("GET", url, headers=headers, params=querystring)
+        # json_object = json.loads(response.text)
 
-    # querystring = {"q":"Russia","lang":"en","media":"True"}
+        #DEV
+        f = open("sample.json", "r")
+        news_data = f.read()
+        json_object = json.loads(news_data)
+        
+        
+        return render_template('dashboard.html',students=json_object)
 
-    # headers = {
-    #     "X-RapidAPI-Key": "78394ce5f7msh148449ce3836679p1239b2jsnb6fb656b52e5",
-    #     "X-RapidAPI-Host": "newscatcher.p.rapidapi.com"
-    # }
-
-    # response = requests.request("GET", url, headers=headers, params=querystring)
-
-    # json_object = json.loads(response.text)
-    # # Open function to open the file "MyFile1.txt"
-    # # (same directory) in read mode and
-    # file1 = open("sample.json", "w")
-
-    # file1.writelines(response.text)
-    f = open("sample.json", "r")
-    news_data = f.read()
-    f = open("sample.json", "r")
-    news_data = f.read()
-    json_object = json.loads(news_data)
-    
-    return render_template('dashboard.html',students=json_object)
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "main":
