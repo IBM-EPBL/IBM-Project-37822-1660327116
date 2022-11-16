@@ -114,6 +114,7 @@ def login():
 
             if password==key.strip():
                 print("User exists, Logged in successfully")
+                return render_template('login.html')
                 return redirect("/dashboard", code=302)
             else:
                 print("Password is incorrect")

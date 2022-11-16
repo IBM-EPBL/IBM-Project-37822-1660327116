@@ -1,7 +1,15 @@
 {% extends 'base.html' %} {% block content %}
 
 
-
+<script>
+  const email = localStorage.getItem('email');
+  if (email!=null) {
+    console.log(email);
+  }
+  else {
+    window.location.href = '/login';
+  }
+</script>
 <section
   class="hero d-flex flex-column justify-content-center align-items-center"
   data-aos="fade"
@@ -15,8 +23,14 @@
         </h2>
       </div>
       <div class="col-lg-6 text-center">
-        <button class="btn btn-primary">Logout</button>
+        <button class="btn btn-primary" onclick="logout()">Logout</button>
       </div>
+      <script type="text/javascript">
+        function logout() {
+          localStorage.clear("email");
+          window.location.href = "/login";
+        }
+      </script>
     </div>
   </div>
 </section>
@@ -53,6 +67,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
+          
         </div>
       </div>
     </div>

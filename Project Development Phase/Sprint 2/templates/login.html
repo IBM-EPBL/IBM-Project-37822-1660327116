@@ -31,6 +31,7 @@
         <input
           type="email"
           class="form-control"
+          id="email"
           name="email"
           placeholder="Email"
           required
@@ -52,9 +53,17 @@
       </div>
 
       <div class="text-center py-4">
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" onclick="store()" class="btn btn-primary">
+          Login
+        </button>
       </div>
     </form>
+    <script type="text/javascript">
+      function store() {
+        var inputEmail = document.getElementById("email");
+        localStorage.setItem("email", inputEmail.value);
+      }
+    </script>
 
     <!-- End Contact Form -->
   </div>
@@ -81,5 +90,4 @@
 </div>
 
 <!-- Vendor JS Files -->
-
 {% endblock %}
