@@ -1,15 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
 
-<script>
-  const email = localStorage.getItem('email');
-  if (email!=null) {
-    console.log(email);
-  }
-  else {
-    window.location.href = '/login';
-  }
-</script>
 <section
   class="hero d-flex flex-column justify-content-center align-items-center"
   data-aos="fade"
@@ -18,30 +9,41 @@
   <div class="container">
     <div class="row justify-content-between">
       <div class="col-lg-6 text-center">
-        <h2>Welcome<span>{{email}}</span>!<br/>
+        <h2>Welcome {{first_name}}!<br/>
         Scroll for more news
         </h2>
       </div>
       <div class="col-lg-6 text-center">
-        <button class="btn btn-primary" id="logout" onclick="logout()">Logout</button>
+        <button type="submit" class="btn btn-primary" id="logout">
+          Logout
+        </button>
+        <script>
+          document.getElementById("logout").onclick = function() {logout()};
+          
+          function logout() {
+            $.ajax({
+              url: "/logout",
+              type: "POST",
+              success: function(response) {
+                window.location.href = "/";
+              },
+              error: function(error) {
+                console.log(error);
+              }
+            });
+          }
+          </script>
+      
+        <button class="btn btn-primary" id="profile">
+          Profile
+      </button>
+<script>
+  document.getElementById("profile").onclick = function() {profile()};
+  function profile() {
+    window.location.href = "/profile";
+  }
+</script>
       </div>
-      <script type="text/javascript" >
-        function logout() {
-       
-          document.getElementById('logout').onclick = function logout() {
-          let email = localStorage.getItem('email');
-          $.ajax({
-          type: "POST",
-          url: "/logout",
-          data: JSON.stringify(email),
-          contentType: "application/json",
-          dataType: 'json' 
-          });
-          localStorage.removeItem('email');
-          window.location.href = "/login";
-        }
-      }
-      </script>
     </div>
   </div>
 </section>
