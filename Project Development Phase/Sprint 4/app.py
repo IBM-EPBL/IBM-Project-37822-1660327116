@@ -3,6 +3,7 @@ import ibm_db
 import os
 import pandas as pd
 import smtplib
+from dotenv import load_dotenv
 from email.message import EmailMessage
 import requests
 import json
@@ -22,17 +23,24 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-
+# Loading up the values
+load_dotenv()
+#DB Creds
+database = os.environ.get("DATABASE")
+db_hostname = os.environ.get("HOSTNAME")
+db_port = os.environ.get("PORT")
+db_uid = os.environ.get("UID")
+db_pwd = os.environ.get("PWD")
+email_pwd = os.environ.get("email_password")
 
 
 # Database Connection
 try:
     conn = ibm_db.connect(
-    f'DATABASE=BLUDB;HOSTNAME=fbd88901-ebdb-4a4f-a32e-9822b9fb237b.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;PORT=32731;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=tfy84094;PWD=9ibreJkzJF8l0ZTA', '', '')
+    f'DATABASE={database};HOSTNAME={db_hostname};PORT={db_port};SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID={db_uid};PWD={db_pwd}', '', '')
     print("Connected to database: ", conn)
 except Exception as e:
     print (e)
-
 
 def message(subject="Python Notification",
             text="", img=None, attachment=None):
