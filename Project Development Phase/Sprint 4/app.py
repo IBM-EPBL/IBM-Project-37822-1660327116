@@ -1,7 +1,6 @@
 from flask import  Flask,render_template, request, redirect, url_for, session
 import ibm_db
 import os
-from dotenv import load_dotenv
 import pandas as pd
 import smtplib
 from email.message import EmailMessage
@@ -23,22 +22,13 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Loading up the values
-load_dotenv()
-#DB Creds
-database = os.environ.get("DATABASE")
-db_hostname = os.environ.get("HOSTNAME")
-db_port = os.environ.get("PORT")
-db_uid = os.environ.get("UID")
-db_pwd = os.environ.get("PWD")
-email_pwd = os.environ.get("email_password")
 
 
 
 # Database Connection
 try:
     conn = ibm_db.connect(
-    f'DATABASE={database};HOSTNAME={db_hostname};PORT={db_port};SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID={db_uid};PWD={db_pwd}', '', '')
+    f'DATABASE=BLUDB;HOSTNAME=fbd88901-ebdb-4a4f-a32e-9822b9fb237b.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;PORT=32731;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=tfy84094;PWD=9ibreJkzJF8l0ZTA', '', '')
     print("Connected to database: ", conn)
 except Exception as e:
     print (e)
@@ -73,7 +63,7 @@ def mail():
     smtp.starttls()
 
     # Login with your email and password
-    smtp.login("jesinthan0703@gmail.com", email_pwd)
+    smtp.login("jesinthan0703@gmail.com","dwzlnyfobebtoykx")
 
     # url = "https://newscatcher.p.rapidapi.com/v1/search_free"
     # querystring = {"q":"Russia","lang":"en","media":"True"}
@@ -120,7 +110,7 @@ def home():
 
     def send_mail(r_mail, content):
         s_mail = "jesinthan0703@gmail.com"
-        s_pass = email_pwd
+        s_pass = "dwzlnyfobebtoykx"
         msg=EmailMessage()
         msg['Subject'] = f"Registration Successful"
         msg['From'] = s_mail
