@@ -71,7 +71,7 @@ def mail():
     smtp.starttls()
 
     # Login with your email and password
-    smtp.login("jesinthan0703@gmail.com","dwzlnyfobebtoykx")
+    smtp.login("jesinthan0703@gmail.com",email_pwd)
 
     # url = "https://newscatcher.p.rapidapi.com/v1/search_free"
     # querystring = {"q":"Russia","lang":"en","media":"True"}
@@ -118,7 +118,7 @@ def home():
 
     def send_mail(r_mail, content):
         s_mail = "jesinthan0703@gmail.com"
-        s_pass = "dwzlnyfobebtoykx"
+        s_pass = email_pwd
         msg=EmailMessage()
         msg['Subject'] = f"Registration Successful"
         msg['From'] = s_mail

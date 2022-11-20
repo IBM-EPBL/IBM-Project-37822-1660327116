@@ -3,6 +3,7 @@ import ibm_db
 import os
 import pandas as pd
 import smtplib
+from dotenv import load_dotenv
 from email.message import EmailMessage
 import requests
 import json
@@ -25,14 +26,25 @@ Session(app)
 
 
 
+
+# Loading up the values
+load_dotenv()
+#DB Creds
+database = os.environ.get("DATABASE")
+db_hostname = os.environ.get("HOSTNAME")
+db_port = os.environ.get("PORT")
+db_uid = os.environ.get("UID")
+db_pwd = os.environ.get("PWD")
+email_pwd = os.environ.get("email_password")
+
+
 # Database Connection
 try:
     conn = ibm_db.connect(
-    f'DATABASE=BLUDB;HOSTNAME=fbd88901-ebdb-4a4f-a32e-9822b9fb237b.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;PORT=32731;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=tfy84094;PWD=9ibreJkzJF8l0ZTA', '', '')
+    f'DATABASE={database};HOSTNAME={db_hostname};PORT={db_port};SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID={db_uid};PWD={db_pwd}', '', '')
     print("Connected to database: ", conn)
 except Exception as e:
     print (e)
-
 
 def message(subject="Python Notification",
             text="", img=None, attachment=None):
@@ -63,7 +75,7 @@ def mail():
     smtp.starttls()
 
     # Login with your email and password
-    smtp.login("jesinthan0703@gmail.com","dwzlnyfobebtoykx")
+    smtp.login("jesinthan0703@gmail.com",email_pwd)
 
     # url = "https://newscatcher.p.rapidapi.com/v1/search_free"
     # querystring = {"q":"Russia","lang":"en","media":"True"}
@@ -110,7 +122,7 @@ def home():
 
     def send_mail(r_mail, content):
         s_mail = "jesinthan0703@gmail.com"
-        s_pass = "dwzlnyfobebtoykx"
+        s_pass = email_pwd
         msg=EmailMessage()
         msg['Subject'] = f"Registration Successful"
         msg['From'] = s_mail
