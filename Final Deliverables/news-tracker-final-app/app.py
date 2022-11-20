@@ -16,15 +16,10 @@ from email.mime.multipart import MIMEMultipart
 from jinja2 import Environment
 
 
-
-
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-
-
-
 
 
 # Loading up the values
@@ -36,6 +31,7 @@ db_port = os.environ.get("PORT")
 db_uid = os.environ.get("UID")
 db_pwd = os.environ.get("PWD")
 email_pwd = os.environ.get("email_password")
+rapid_api_key = os.environ.get("rapid-api-key")
 
 
 # Database Connection
@@ -77,18 +73,18 @@ def mail():
     # Login with your email and password
     smtp.login("jesinthan0703@gmail.com",email_pwd)
 
-    # url = "https://newscatcher.p.rapidapi.com/v1/search_free"
-    # querystring = {"q":"Russia","lang":"en","media":"True"}
-    # headers = {
-    #     "X-RapidAPI-Key": "78394ce5f7msh148449ce3836679p1239b2jsnb6fb656b52e5",
-    #     "X-RapidAPI-Host": "newscatcher.p.rapidapi.com"
-    # }
-    # response = requests.request("GET", url, headers=headers, params=querystring)
-    # json_object = json.loads(response.text)
+    url = "https://newscatcher.p.rapidapi.com/v1/search_free"
+    querystring = {"q":"Russia","lang":"en","media":"True"}
+    headers = {
+        "X-RapidAPI-Key": rapid_api_key,
+        "X-RapidAPI-Host": "newscatcher.p.rapidapi.com"
+    }
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    json_object = json.loads(response.text)
 
-    f = open("sample.json", "r")
-    news_data = f.read()
-    json_object = json.loads(news_data)
+    # f = open("sample.json", "r")
+    # news_data = f.read()
+    # json_object = json.loads(news_data)
 
     data = json_object["articles"]
 
@@ -224,19 +220,19 @@ def dashboard():
 
         try:
             #PRODUCTION
-            # url = "https://newscatcher.p.rapidapi.com/v1/search_free"
-            # querystring = {"q":"Russia","lang":"en","media":"True"}
-            # headers = {
-            #     "X-RapidAPI-Key": "78394ce5f7msh148449ce3836679p1239b2jsnb6fb656b52e5",
-            #     "X-RapidAPI-Host": "newscatcher.p.rapidapi.com"
-            # }
-            # response = requests.request("GET", url, headers=headers, params=querystring)
-            # json_object = json.loads(response.text)
+            url = "https://newscatcher.p.rapidapi.com/v1/search_free"
+            querystring = {"q":"Russia","lang":"en","media":"True"}
+            headers = {
+                "X-RapidAPI-Key": rapid_api_key,
+                "X-RapidAPI-Host": "newscatcher.p.rapidapi.com"
+            }
+            response = requests.request("GET", url, headers=headers, params=querystring)
+            json_object = json.loads(response.text)
 
             #DEV
-            f = open("sample.json", "r")
-            news_data = f.read()
-            json_object = json.loads(news_data)
+            # f = open("sample.json", "r")
+            # news_data = f.read()
+            # json_object = json.loads(news_data)
             
             try:
                 sql="SELECT * FROM users WHERE email = '"+session["email"]+"' "
